@@ -3,7 +3,7 @@ Rudimental Game made with Fyrox Engine and https://github.com/kkolyan/fyrox_lite
 
 Lua port of https://github.com/kkolyan/fyrox_guards
 
-Explored Fyrox APIs:
+Explored Fyrox APIs ([annotations available](https://github.com/kkolyan/fyrox_lite_lua/blob/main/fyrox-lite.lua)):
 * Node graph.
 * RigidBody (3D)
 * Ray Casting
@@ -26,6 +26,6 @@ cargo run -p editor --manifest-path ../fyrox_lite_lua/Cargo.toml
 ```
 
 # How to edit scripts
-Feel free to use any text editor to edit existing files under [scripts](scripts) directory.
+Feel free to use any text editor to edit existing files under [scripts](scripts) directory. If you use VSCode, don't forget to download [annotations](https://github.com/kkolyan/fyrox_lite_lua/blob/main/fyrox-lite.lua) for code insight.
 
 ![gameplay.png](gameplay.png)
