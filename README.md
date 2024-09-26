@@ -27,3 +27,5 @@ cargo run -p editor --manifest-path ../fyrox_lite_lua/Cargo.toml
 
 # How to edit scripts
 Feel free to use any text editor to edit existing files under [scripts](scripts) directory.
+
+![gameplay.png](gameplay.png)
