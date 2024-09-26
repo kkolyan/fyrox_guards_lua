@@ -7,7 +7,6 @@ Bullet = script_class()
 
 Bullet.HitMessage = "BulletHit"
 
-
 ---@class BulletSeed
 ---@field prefab Prefab
 ---@field origin Vector3
@@ -15,9 +14,8 @@ Bullet.HitMessage = "BulletHit"
 ---@field initial_velocity number
 ---@field author_collider Node
 ---@field range number
-local BulletSeed = {}
+BulletSeed = nil
 
----@param scene Scene
 ---@param seed BulletSeed
 function Bullet:spawn(seed)
     local orientation = Quaternion:face_towards(seed.direction, Vector3.Y);
@@ -28,29 +26,29 @@ function Bullet:spawn(seed)
     script.author_collider = seed.author_collider
 end
 
----@param ctx ScriptContext
 function Bullet:on_update(dt)
     self.remaining_sec = self.remaining_sec - dt
     if self.remaining_sec <= 0.0 then
-        ctx.handle:remove_node()
+        self.node:destroy()
         return;
     end
     local new_pos = self.node:local_position():add(self.velocity:mul(dt))
 
     ---@type RayCastOptions
     local opts = {
-        ray_origin= self.node:local_position(),
-        ray_direction= self.velocity:normalize(),
-        max_len=self.velocity:magnitude() * dt,
-        sort_results= true
+        ray_origin = self.node:local_position(),
+        ray_direction = self.velocity:normalize(),
+        max_len = self.velocity:magnitude() * dt,
+        sort_results = true
     }
+    ---@type Intersection[]
     local results = {}
     Physics:cast_ray(opts, results)
 
     for i, hit in ipairs(results) do
         if hit.collider ~= self.author_collider then
             hit.collider:send_hierarchical(RoutingStrategy.Up, Bullet.HitMessage)
-			self.node:destroy()
+            self.node:destroy()
             return;
         end
     end

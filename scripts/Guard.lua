@@ -15,7 +15,6 @@
 Guard = script_class()
 
 
----@param ctx ScriptContext
 ---@return boolean
 function Guard:try_attack_player()
     local player_pos = Plugin:get("Game").player:global_position()
